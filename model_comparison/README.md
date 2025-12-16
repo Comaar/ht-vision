@@ -16,6 +16,23 @@ This folder contains code and results for comparing multiple YOLO models on the 
 - `configs/data.yaml`  
   Dataset configuration used by Ultralytics YOLO.
 
+## Dataset preprocessing and class merging
+
+The original Roboflow Aquarium dataset provides multiple object classes:
+
+- fish
+- shark
+- stingray
+- jellyfish
+- penguin
+- puffin
+- starfish
+
+For this study, a **single-class detection setup** was adopted.  
+Annotations belonging to `fish`, `shark`, and `stingray` were merged into one unified class labeled `fish`. All other classes were discarded.
+
+This choice simplifies the task to **generic fish detection**, aligning the model objective with downstream application requirements.
+
 ## Models compared
 
 - yolo11m.pt
