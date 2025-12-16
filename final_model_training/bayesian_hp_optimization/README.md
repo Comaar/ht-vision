@@ -7,12 +7,8 @@ The optimization process is structured in two sequential phases:
 1. **Phase 1.1** – Optimization of core training hyperparameters  
 2. **Phase 1.2** – Optimization of data augmentation hyperparameters  
 
-Both phases are executed on the **single-class fish detection dataset**, derived from the Roboflow Aquarium dataset after class merging.
+Both phases are executed on the **combined dataset**.
 
----
-
-
----
 
 ## Files
 
@@ -22,19 +18,6 @@ Both phases are executed on the **single-class fish detection dataset**, derived
 - **`optuna_phase2_data_augementation_hp_search.py`**  
   Optuna study for optimizing data augmentation hyperparameters, including geometric and color transformations.
 
----
-
-## Dataset and task definition
-
-- **Dataset source:** Roboflow Aquarium dataset  
-- **Task type:** Single-class object detection  
-- **Class definition:**  
-  The original classes `fish`, `shark`, and `stingray` were merged into a single target class labeled **`fish`**.  
-  All other classes were discarded.
-
-This setup simplifies the task to **generic fish detection**, aligning with downstream application requirements.
-
----
 
 ## Results
 
