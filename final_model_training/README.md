@@ -11,7 +11,7 @@ The notebook `YOLO11_HT_Vision_two_stage_training.ipynb` implements a **two-stag
 > This naming is intentionally preserved to remain consistent with the existing Jupyter notebook and previously generated training artifacts.
 
 ### Dataset configuration
-- Dataset source: Roboflow Aquarium (class-merged).
+- Dataset source: Unified Custom Dataset.
 - Task: single-class object detection (`fish`).
 - Dataset paths are defined via absolute paths and must be adapted for other environments.
 
