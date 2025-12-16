@@ -1,0 +1,10 @@
+# 1. Define the absolute paths to your image folders
+train: /mnt/Data1/mpiccolo/Yolo_test/dataset/roboflow_Aquarium_Combined.v6i.yolov8/train/images
+val: /mnt/Data1/mpiccolo/Yolo_test/dataset/roboflow_Aquarium_Combined.v6i.yolov8/valid/images
+test: /mnt/Data1/mpiccolo/Yolo_test/dataset/roboflow_Aquarium_Combined.v6i.yolov8/test/images
+
+# 2. Define the number of classes
+nc: 1
+
+# 3. Define the class names
+names: ['fish']
