@@ -17,12 +17,9 @@ In short, this folder handles:
 
 ```text
 dataset_composition/
-├── 01_annotation_converter.ipynb   # optional: 
-convert annotations to YOLO format
-├── 02_datasets_audit.ipynb         # audit, clean, 
-deduplicate, export supervised-ready datasets
-├── 03_merge_dataset.ipynb          # merge datasets, 
-unify classes, split train/val/test
+├── 01_annotation_converter.ipynb   # optional: convert annotations to YOLO format
+├── 02_datasets_audit.ipynb         # audit, clean,deduplicate, export supervised-ready datasets
+├── 03_merge_dataset.ipynb          # merge datasets, unify classes, split train/val/test
 └── README
 ```
 
