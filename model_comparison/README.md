@@ -53,13 +53,15 @@ This choice simplifies the task to **generic fish detection**, aligning the mode
 
 ## Inference comparison (training sample)
 
+## Inference comparison (training sample)
+
 | Original | YOLO11m | YOLO11n |
-|---------|---------|---------|
-| ![](inferece_images/original_inference_pinksalmon.png) | ![](inference_result_Train_yolo11m.png) | ![](inference_result_Train_yolo11n.png) |
+|----------|---------|---------|
+| ![](inference_images/original_inference_pinksalmon.png) | ![](inference_images/inference_result_Train_yolo11m.png) | ![](inference_images/inference_result_Train_yolo11n.png) |
 
 | YOLO11s | YOLOv8m | YOLOv8 OzFish + AquaCoop |
 |---------|---------|--------------------------|
-| ![](inference_result_Train_yolo11s.png) | ![](inference_result_Train_yolov8m3.png) | ![](inference_result_Train_yolov8_OzFish_AquaCoop.png) |
+| ![](inference_images/inference_result_Train_yolo11s.png) | ![](inference_images/inference_result_Train_yolov8m3.png) | ![](inference_images/inference_result_Train_yolov8_OzFish_AquaCoop.png) |
 
 **Notes**
 - Metrics are computed on the same validation set.
