@@ -51,7 +51,7 @@ This choice simplifies the task to **generic fish detection**, aligning the mode
 | YOLOv8m                | **0.4846** | 0.7901     | 0.7837    |**0.7356**|**0.7589** |
 | YOLOv8 OzFish+AquaCoop | 0.3570     | 0.6740     | 0.7421    | 0.6048   | 0.6664    |
 
-## Inference comparison (training sample)
+## Inference comparison
 
 | Original | YOLO11m | YOLO11n |
 |----------|---------|---------|
