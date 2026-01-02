@@ -55,7 +55,7 @@ This choice simplifies the task to **generic fish detection**, aligning the mode
 
 | Original | YOLO11m | YOLO11n |
 |---------|---------|---------|
-| ![](original_inference_pinksalmon.png) | ![](inference_result_Train_yolo11m.png) | ![](inference_result_Train_yolo11n.png) |
+| ![](inferece_images/original_inference_pinksalmon.png) | ![](inference_result_Train_yolo11m.png) | ![](inference_result_Train_yolo11n.png) |
 
 | YOLO11s | YOLOv8m | YOLOv8 OzFish + AquaCoop |
 |---------|---------|--------------------------|
