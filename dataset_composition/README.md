@@ -24,6 +24,7 @@ deduplicate, export supervised-ready datasets
 ├── 03_merge_dataset.ipynb          # merge datasets, 
 unify classes, split train/val/test
 └── README
+```
 
 ### 01_annotation_comnverter.ipynb
 Converts and harmonizes all annotations into YOLO-format 
