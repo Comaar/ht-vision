@@ -51,6 +51,16 @@ This choice simplifies the task to **generic fish detection**, aligning the mode
 | YOLOv8m                | 0.4846   | 0.7901 | 0.7837    | 0.7356 | 0.7589   |
 | YOLOv8 OzFish+AquaCoop | 0.3570   | 0.6740 | 0.7421    | 0.6048 | 0.6664   |
 
+## Inference comparison (training sample)
+
+| Original | YOLO11m | YOLO11n |
+|---------|---------|---------|
+| ![](original_inference_pinksalmon.png) | ![](inference_result_Train_yolo11m.png) | ![](inference_result_Train_yolo11n.png) |
+
+| YOLO11s | YOLOv8m | YOLOv8 OzFish + AquaCoop |
+|---------|---------|--------------------------|
+| ![](inference_result_Train_yolo11s.png) | ![](inference_result_Train_yolov8m3.png) | ![](inference_result_Train_yolov8_OzFish_AquaCoop.png) |
+
 **Notes**
 - Metrics are computed on the same validation set.
 - Results are summarized in `evaluation_results.csv`.
