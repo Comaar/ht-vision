@@ -35,6 +35,7 @@ The experiments address:
 
 ## Repository Structure
 
+```text
 ht-vision/
 ├── dataset_composition/
 │   ├── 01_annotation_converter.ipynb
@@ -62,7 +63,7 @@ ht-vision/
 │
 ├── README.md
 └── LICENSE
-
+```
 ---
 
 ## Dataset Composition
