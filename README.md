@@ -115,21 +115,6 @@ Key research dimensions explored in this repository include:
 
 ---
 
-## Documentation
-
-Each major module contains a dedicated `README.md` describing:
-- methodological choices,
-- experimental assumptions,
-- design decisions and known limitations.
-
-This repository is intended to support:
-- academic research and experimentation,
-- thesis and technical report development,
-- reproducible computer vision workflows.
-
----
-
-
 ## License
 
 This project is released under the  
