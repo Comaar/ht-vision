@@ -21,7 +21,3 @@ It aggregates experimental results and produces quantitative summaries describin
 Studies correlations between distortion severity and performance metrics.  
 This notebook focuses on identifying trends and relationships between distortion types and cross-domain generalization behavior.
 
-## Notes
-- All notebooks avoid hard-coded machine-specific paths and are intended to run in a portable environment.
-- Expected data and experiment outputs should be placed in the appropriate relative directories before execution.
-
