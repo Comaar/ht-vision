@@ -39,13 +39,3 @@ This configuration yielded the best objective value during the Phase 1.1 Optuna 
 
 These augmentation parameters provided the best performance during Phase 1.2, improving robustness through controlled geometric and color transformations.
 
----
-
-## How to run
-
-From the repository root:
-
-```bash
-python final_model_training/bayesian_hp_optimization/optuna_phase1_core_hp_search.py
-python final_model_training/bayesian_hp_optimization/optuna_phase2_data_augementation_hp_search.py
-
