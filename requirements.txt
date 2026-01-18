@@ -1,0 +1,28 @@
+# Requirements for HT-Vision
+
+# Core ML framework
+ultralytics>=8.0.0
+
+# Hyperparameter optimization
+optuna>=3.0.0
+
+# Data processing
+pandas>=1.5.0
+numpy>=1.23.0
+
+# Image processing
+Pillow>=9.0.0
+opencv-python>=4.7.0
+
+# Jupyter environment
+jupyter>=1.0.0
+ipykernel>=6.0.0
+ipywidgets>=8.0.0
+
+# Visualization
+matplotlib>=3.6.0
+seaborn>=0.12.0
+
+# Utilities
+tqdm>=4.64.0
+PyYAML>=6.0

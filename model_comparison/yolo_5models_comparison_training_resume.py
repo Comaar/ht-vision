@@ -1,84 +1,98 @@
+#!/usr/bin/env python3
+"""
+Multi-model YOLO comparison training script.
+Supports checkpoint resumption and skip logic for completed runs.
+"""
+
 from ultralytics import YOLO
 from IPython.display import display, Image
 import os
 import pandas as pd
 import datetime
 
-# ---------------------- Ensure Working Directory ---------------------- #
-target_dir = "/mnt/Data1/mpiccolo/Yolo_test"
-try:
-    os.chdir(target_dir)
-    print(f"✅ Changed working directory to: {os.getcwd()}")
-except Exception as e:
-    print(f"❌ Failed to change directory to {target_dir}: {e}")
-    exit(1)
 
-# ---------------------- Config ---------------------- #
-models_to_compare = [
+# ==============================================================================
+# Configuration — update these paths before running
+# ==============================================================================
+WORKING_DIR = os.environ.get("YOLO_WORKDIR", "./runs")
+DATASET_PATH = os.environ.get("YOLO_DATA_YAML", "./dataset/data.yaml")
+OUTPUT_DIR = os.environ.get("YOLO_OUTPUT_DIR", "./comparison_results")
+
+MODELS = [
     "yolo11m.pt",
     "yolo11n.pt",
     "yolo11s.pt",
     "yolov8m.pt",
-    "yolov8_OzFish+AquaCoop.pt"
+    "yolov8_OzFish+AquaCoop.pt",
 ]
 
-data_yaml_path = os.path.join(target_dir, "dataset", "roboflow_Aquarium_Combined.v6i.yolov8", "data.yaml")
-project_name = os.path.join(target_dir, "YOLO_5Models_Comparison_v2")
-os.makedirs(project_name, exist_ok=True)
+# ==============================================================================
+# Setup
+# ==============================================================================
+try:
+    os.chdir(WORKING_DIR)
+    print(f"Working directory: {os.getcwd()}")
+except Exception as e:
+    print(f"[ERROR] Failed to change directory: {e}")
+    exit(1)
 
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 training_log = []
 
-print(f"📊 Starting training for {len(models_to_compare)} models.\n")
+print(f"Starting training for {len(MODELS)} models.\n")
 
-# ---------------------- Training Loop ---------------------- #
-for model_name in models_to_compare:
+# ==============================================================================
+# Training loop
+# ==============================================================================
+for model_name in MODELS:
     print("\n" + "=" * 70)
-    print(f"🚀 TRAINING MODEL: {model_name}")
+    print(f"MODEL: {model_name}")
     print("=" * 70 + "\n")
 
     run_name_safe = os.path.basename(model_name).replace('.pt', '').replace('+', '_').replace(' ', '_')
     run_name = f"Train_{run_name_safe}"
-    run_dir = os.path.join(project_name, run_name)
+    run_dir = os.path.join(OUTPUT_DIR, run_name)
 
-    # Paths to possible checkpoints
     best_path = os.path.join(run_dir, "weights", "best.pt")
     last_path = os.path.join(run_dir, "weights", "last.pt")
     results_path = os.path.join(run_dir, "results.png")
 
-    # --- Skip if training already completed ---
+    # Skip if already trained
     if os.path.exists(best_path) and os.path.exists(results_path):
-        print(f"✅ Skipping {model_name} — training already completed.")
+        print(f"Skipping {model_name} — already completed.")
         training_log.append({
             "model": model_name,
-            "train_run": run_name,
+            "run": run_name,
             "run_directory": run_dir,
-            "status": "skipped_already_trained",
+            "status": "skipped",
             "timestamp": datetime.datetime.now().isoformat()
         })
         continue
 
-    # --- Resume or start new training ---
+    # Resume from checkpoint if available
+    resumed = False
     if os.path.exists(last_path):
         model_path = last_path
-        print(f"🔁 Resuming training from checkpoint: {last_path}")
+        resumed = True
+        print(f"Resuming from checkpoint: {last_path}")
     else:
         model_path = model_name
-        print(f"🆕 Starting new training from model: {model_path}")
+        print(f"Starting fresh training: {model_path}")
 
     try:
         model = YOLO(model_path)
     except Exception as e:
-        print(f"[ERROR] Could not load model {model_path}. Skipping.\n{e}")
+        print(f"[ERROR] Could not load model: {e}")
         continue
 
     try:
         model.train(
-            data=data_yaml_path,
+            data=DATASET_PATH,
             epochs=100,
             imgsz=640,
             batch=16,
             device=0,
-            project=project_name,
+            project=OUTPUT_DIR,
             name=run_name,
             patience=10,
             optimizer='SGD',
@@ -93,35 +107,34 @@ for model_name in models_to_compare:
 
         training_log.append({
             "model": model_name,
-            "train_run": run_name,
+            "run": run_name,
             "run_directory": run_dir,
-            "resumed_from": model_path if os.path.exists(last_path) else "original .pt",
-            "status": "trained/resumed",
+            "resumed_from": model_path if resumed else "original",
+            "status": "completed",
             "timestamp": datetime.datetime.now().isoformat()
         })
 
-        # Display results chart (if in Jupyter)
-        results_chart_path = os.path.join(run_dir, 'results.png')
-        if os.path.exists(results_chart_path):
+        # Show results if in Jupyter
+        if os.path.exists(results_path):
             try:
-                print(f"\n📈 Training Curves for {model_name}:")
-                display(Image(filename=results_chart_path))
-            except:
-                print(f"[NOTE] Not in Jupyter — skipping image display.")
-        else:
-            print(f"[WARNING] No results chart found at {results_chart_path}.")
+                print(f"\nTraining curves for {model_name}:")
+                display(Image(filename=results_path))
+            except Exception:
+                pass
 
     except Exception as e:
-        print(f"[ERROR] Training failed for {model_name}. Skipping.\n{e}")
+        print(f"[ERROR] Training failed: {e}")
         continue
 
-# ---------------------- Save Training Log ---------------------- #
+# ==============================================================================
+# Save log
+# ==============================================================================
 if training_log:
-    df_log = pd.DataFrame(training_log)
-    log_csv_path = os.path.join(project_name, "training_runs_log.csv")
-    df_log.to_csv(log_csv_path, index=False)
-    print(f"\n📁 Training run log saved to: {log_csv_path}")
+    df = pd.DataFrame(training_log)
+    log_path = os.path.join(OUTPUT_DIR, "training_log.csv")
+    df.to_csv(log_path, index=False)
+    print(f"\nLog saved: {log_path}")
 else:
-    print("\n⚠️ No models trained successfully. Check logs for details.")
+    print("\nNo models trained successfully. Check logs for details.")
 
-print("\n🏁 All training complete.")
+print("\nAll training complete.")

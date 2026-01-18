@@ -2,38 +2,34 @@
 
 This folder contains code and results for comparing multiple YOLO models on the Aquarium dataset.
 
+---
+
 ## Contents
 
-- `yolo_5models_comparison_training_resume.py`  
-  Training script that can skip completed runs and resume from checkpoints (`last.pt`) when available.
+| File | Description |
+|------|-------------|
+| `yolo_5models_comparison_training_resume.py` | Training script with resume/skip logic |
+| `evaluation_results.csv` | Summary metrics (mAP, Precision, Recall, F1) |
+| `ds_aquarium_combined.ipynb` | Dataset inspection and preparation notebook |
+| `configs/data.yaml` | Dataset configuration for Ultralytics YOLO |
+| `inference_images/` | Sample inference visualizations |
 
-- `evaluation_results.csv`  
-  Summary metrics for each trained model (mAP50-95, mAP50, Precision, Recall, F1).
+---
 
-- `ds_aquarium_cobined.ipynb`  
-  Notebook used for dataset inspection / preparation (as used on the training server).
-
-- `configs/data.yaml`  
-  Dataset configuration used by Ultralytics YOLO.
-
-## Dataset preprocessing and class merging
+## Dataset Preprocessing and Class Merging
 
 The original Roboflow Aquarium dataset provides multiple object classes:
 
-- fish
-- shark
-- stingray
-- jellyfish
-- penguin
-- puffin
-- starfish
+- fish, shark, stingray
+- jellyfish, penguin, puffin, starfish
 
-For this study, a **single-class detection setup** was adopted.  
-Annotations belonging to `fish`, `shark`, and `stingray` were merged into one unified class labeled `fish`. All other classes were discarded.
+For this study, a **single-class detection setup** was adopted. Annotations belonging to `fish`, `shark`, and `stingray` were merged into one unified class labeled `fish`. All other classes were discarded.
 
-This choice simplifies the task to **generic fish detection**, aligning the model objective with downstream application requirements.
+This simplifies the task to **generic fish detection**, aligning with downstream application requirements.
 
-## Models compared
+---
+
+## Models Compared
 
 - yolo11m.pt
 - yolo11n.pt

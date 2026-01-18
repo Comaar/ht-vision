@@ -1,6 +1,9 @@
 # Hydrotwin Vision
 
-A research-oriented repository for **training, evaluating, and comparing multiple YOLO-based object detection models** applied to aquatic species detection in underwater and aquarium environments.
+A research-oriented repository for **training, evaluating, and comparing YOLO-based object detection models** applied to aquatic species detection in underwater and aquarium environments.
+
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 
 ---
 
@@ -8,12 +11,77 @@ A research-oriented repository for **training, evaluating, and comparing multipl
 
 This repository collects **datasets, training pipelines, evaluation utilities, and comparison experiments** developed for the HT-Vision project.
 
-The main objectives are to:
-- investigate **object detection performance** across multiple YOLO architectures,
-- evaluate **training strategies and dataset composition choices**,
-- compare models using **consistent datasets and evaluation metrics**.
+**Main objectives:**
+
+- Investigate **object detection performance** across multiple YOLO architectures
+- Evaluate **training strategies and dataset composition choices**
+- Compare models using **consistent datasets and evaluation metrics**
 
 The project is designed as a **modular research framework**, supporting reproducibility and structured experimentation.
+
+---
+
+## Prerequisites
+
+- **Python** 3.9 or higher
+- **CUDA-compatible GPU** (recommended for training)
+- **Git** for version control
+
+---
+
+## Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/ht-vision.git
+   cd ht-vision
+   ```
+
+2. **Create a virtual environment:**
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   ```
+
+3. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Verify installation:**
+   ```bash
+   python -c "from ultralytics import YOLO; print('Installation successful!')"
+   ```
+
+---
+
+## Quick Start
+
+### Dataset Preparation
+
+Navigate to `dataset_composition/` and run the notebooks in order:
+
+1. `01_annotation_converter.ipynb` – Convert annotations to YOLO format
+2. `02_datasets_audit.ipynb` – Audit and clean datasets
+3. `03_merge_dataset.ipynb` – Merge datasets and create splits
+
+### Model Training
+
+Use the two-stage training pipeline in `model/training/`:
+
+```bash
+jupyter notebook model/training/YOLO11_HT_Vision_two_stage_training.ipynb
+```
+
+### Model Comparison
+
+Run the comparison script:
+
+```bash
+python model_comparison/yolo_5models_comparison_training_resume.py
+```
+
+> **Note:** Update the paths in scripts to match your local environment before running.
 
 ---
 
@@ -37,33 +105,52 @@ The experiments address:
 
 ```text
 ht-vision/
-├── dataset_composition/
+├── dataset_composition/       # Dataset preparation and merging
 │   ├── 01_annotation_converter.ipynb
 │   ├── 02_datasets_audit.ipynb
 │   ├── 03_merge_dataset.ipynb
 │   └── README.md
 │
-├── model/
+├── model/                     # Training pipelines and optimization
 │   ├── training/
 │   │   └── YOLO11_HT_Vision_two_stage_training.ipynb
 │   ├── results/
-│   │   ├── Training_curves.ipynb
+│   │   ├── training_curves.ipynb
 │   │   └── stage1_vs_stage3_test_metrics.csv
 │   ├── bayesian_hp_optimization/
 │   │   ├── optuna_phase1_core_hp_search.py
-│   │   └── optuna_phase2_data_augementation_hp_search.py
+│   │   ├── optuna_phase2_data_augmentation_hp_search.py
+│   │   └── README.md
 │   └── README.md
 │
-├── model_comparison/
-│   ├── ds_aquarium_cobined.ipynb
+├── model_comparison/          # Multi-model comparison experiments
+│   ├── ds_aquarium_combined.ipynb
 │   ├── yolo_5models_comparison_training_resume.py
 │   ├── evaluation_results.csv
+│   ├── configs/
 │   ├── inference_images/
 │   └── README.md
 │
-├── README.md
-└── LICENSE
+├── cross_domain_analysis/     # Cross-domain generalization studies
+│   ├── 00_prepare_cross_domain_scenarios.ipynb
+│   ├── 01_distortion_analysis.ipynb
+│   ├── 02_distortion_analysis.ipynb
+│   ├── 03_yolo11m_cross_domain_training.ipynb
+│   ├── 04_distortion_correlation.ipynb
+│   └── README.md
+│
+├── docs/                      # Project documentation
+│   ├── AUDIT_REPORT.md
+│   └── REORGANIZATION_PLAN.md
+│
+├── requirements.txt
+├── CONTRIBUTING.md
+├── CHANGELOG.md
+├── SECURITY.md
+├── LICENSE
+└── README.md
 ```
+
 ---
 
 ## Dataset Composition
@@ -94,30 +181,54 @@ Training strategies are designed to evaluate:
 ## Evaluation and Comparison
 
 The `model_comparison/` module provides:
-- unified evaluation datasets,
-- cross-model metric comparison,
-- qualitative inference visualizations.
+
+- Unified evaluation datasets
+- Cross-model metric comparison
+- Qualitative inference visualizations
 
 Evaluation focuses on:
-- precision, recall, and mAP,
-- stage-wise performance differences,
-- generalization across different aquatic environments.
+
+- Precision, recall, and mAP metrics
+- Stage-wise performance differences
+- Generalization across different aquatic environments
+
+📖 See [model_comparison/README.md](model_comparison/README.md) for detailed results.
+
+---
+
+## Cross-Domain Analysis
+
+The `cross_domain_analysis/` module investigates:
+
+- Domain shift effects on model performance
+- Impact of image distortions across datasets
+- Cross-domain generalization strategies
+
+📖 See [cross_domain_analysis/README.md](cross_domain_analysis/README.md) for details.
 
 ---
 
 ## Research Focus
 
-Key research dimensions explored in this repository include:
-- the impact of dataset composition on detection performance,
-- trade-offs between model size, accuracy, and efficiency,
-- effectiveness of multi-stage training strategies,
-- model generalization across heterogeneous visual domains.
+Key research dimensions explored in this repository:
+
+- Impact of **dataset composition** on detection performance
+- Trade-offs between **model size, accuracy, and efficiency**
+- Effectiveness of **multi-stage training strategies**
+- Model **generalization across heterogeneous visual domains**
+
+---
+
+## Contributing
+
+Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ---
 
 ## License
 
-This project is released under the  
-**Creative Commons Attribution–NonCommercial 4.0 International (CC BY-NC 4.0)** license.
+This project is released under the **Creative Commons Attribution–NonCommercial 4.0 International (CC BY-NC 4.0)** license.
 
 Commercial use is **not permitted** without explicit permission from the author.
+
+See [LICENSE](LICENSE) for full terms.
