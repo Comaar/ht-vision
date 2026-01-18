@@ -21,42 +21,6 @@ The project is designed as a **modular research framework**, supporting reproduc
 
 ---
 
-## Prerequisites
-
-- **Python** 3.9 or higher
-- **CUDA-compatible GPU** (recommended for training)
-- **Git** for version control
-
----
-
-## Installation
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/your-username/ht-vision.git
-   cd ht-vision
-   ```
-
-2. **Create a virtual environment:**
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-   ```
-
-3. **Install dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Verify installation:**
-   ```bash
-   python -c "from ultralytics import YOLO; print('Installation successful!')"
-   ```
-
----
-
-## Quick Start
-
 ### Dataset Preparation
 
 Navigate to `dataset_composition/` and run the notebooks in order:
@@ -138,15 +102,8 @@ ht-vision/
 │   ├── 03_yolo11m_cross_domain_training.ipynb
 │   ├── 04_distortion_correlation.ipynb
 │   └── README.md
-│
-├── docs/                      # Project documentation
-│   ├── AUDIT_REPORT.md
-│   └── REORGANIZATION_PLAN.md
-│
+|
 ├── requirements.txt
-├── CONTRIBUTING.md
-├── CHANGELOG.md
-├── SECURITY.md
 ├── LICENSE
 └── README.md
 ```
@@ -219,11 +176,6 @@ Key research dimensions explored in this repository:
 
 ---
 
-## Contributing
-
-Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
----
 
 ## License
 
